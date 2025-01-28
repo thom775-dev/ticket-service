@@ -22,12 +22,11 @@ export class TicketsController {
   }
 
   @UseGuards(JwtGuard)
-  @Post(':eventId')
+  @Post()
   createTicket(
     @GetUser('id') userId: number,
-    @Param('eventId', ParseIntPipe) eventId: number,
     @Body() createTicketDto: CreateTicketDto,
   ) {
-    return this.ticketService.createTicket(userId, eventId, createTicketDto)
+    return this.ticketService.createTicket(userId, createTicketDto)
   }
 }

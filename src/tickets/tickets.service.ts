@@ -11,14 +11,14 @@ export class TicketsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async getTickets() {
-    return this.prisma.ticket.findMany()
+    return this.prisma.ticket.findMany({
+      include: { event: true },
+    })
   }
 
-  async createTicket(
-    userId: number,
-    eventId: number,
-    createTicketDto: CreateTicketDto,
-  ) {
+  async createTicket(userId: number, createTicketDto: CreateTicketDto) {
+    const eventId = createTicketDto.eventId
+
     const event = await this.prisma.event.findUnique({
       where: {
         id: eventId,

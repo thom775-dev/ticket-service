@@ -9,7 +9,14 @@ export class EventsService {
   async getAllEvents() {
     return this.prisma.event.findMany({
       include: {
-        Ticket: true,
+        tickets: {
+          select: {
+            category: true,
+            price: true,
+            availableQuantity: true,
+            soldQuantity: true,
+          },
+        },
       },
     })
   }
@@ -23,7 +30,14 @@ export class EventsService {
         ],
       },
       include: {
-        Ticket: true,
+        tickets: {
+          select: {
+            category: true,
+            price: true,
+            availableQuantity: true,
+            soldQuantity: true,
+          },
+        },
       },
     })
   }
@@ -34,7 +48,14 @@ export class EventsService {
         userId,
       },
       include: {
-        Ticket: true,
+        tickets: {
+          select: {
+            category: true,
+            price: true,
+            availableQuantity: true,
+            soldQuantity: true,
+          },
+        },
       },
     })
   }
@@ -46,7 +67,14 @@ export class EventsService {
         id: eventId,
       },
       include: {
-        Ticket: true,
+        tickets: {
+          select: {
+            category: true,
+            price: true,
+            availableQuantity: true,
+            soldQuantity: true,
+          },
+        },
       },
     })
   }
