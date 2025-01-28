@@ -25,7 +25,7 @@ model User {
 
   @@map("users")
 }
-  
+
 model Event {
   id               Int      @id @default(autoincrement())
   userId           Int
@@ -37,7 +37,23 @@ model Event {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
-  user User @relation(fields: [userId], references: [id])
+  user   User     @relation(fields: [userId], references: [id])
+  Ticket Ticket[]
 
   @@map("events")
+}
+
+model Ticket {
+  id                Int      @id @default(autoincrement())
+  eventId           Int
+  category          String
+  price             Int
+  availableQuantity Int
+  soldQuantity      Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  event Event @relation(fields: [eventId], references: [id])
+
+  @@map("tickets")
 }

@@ -7,7 +7,11 @@ export class EventsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async getAllEvents() {
-    return this.prisma.event.findMany()
+    return this.prisma.event.findMany({
+      include: {
+        Ticket: true,
+      },
+    })
   }
 
   async searchEvent(key: string) {
@@ -18,6 +22,9 @@ export class EventsService {
           { venue: { contains: key, mode: 'insensitive' } },
         ],
       },
+      include: {
+        Ticket: true,
+      },
     })
   }
 
@@ -25,6 +32,9 @@ export class EventsService {
     return this.prisma.event.findMany({
       where: {
         userId,
+      },
+      include: {
+        Ticket: true,
       },
     })
   }
@@ -34,6 +44,9 @@ export class EventsService {
       where: {
         userId,
         id: eventId,
+      },
+      include: {
+        Ticket: true,
       },
     })
   }
