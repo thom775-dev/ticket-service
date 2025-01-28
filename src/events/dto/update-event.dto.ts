@@ -6,8 +6,8 @@ import {
   IsString,
 } from 'class-validator'
 
-export class CreateEventDto {
-  @IsNotEmpty()
+export class UpdateEventDto {
+  @IsOptional()
   @IsString()
   name: string
 
@@ -15,15 +15,15 @@ export class CreateEventDto {
   @IsString()
   description: string
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsDateString()
   dateTime: string
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   venue: string
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsInt()
   availableTickets: number
 }
