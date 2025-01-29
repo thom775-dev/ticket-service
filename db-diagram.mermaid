@@ -1,0 +1,44 @@
+erDiagram
+    User {
+        Int id PK
+        String name
+        String email
+        String hash
+        DateTime createdAt
+        DateTime updatedAt
+    }
+    Event {
+        Int id PK
+        Int userId FK
+        String name
+        String description
+        DateTime dateTime
+        String venue
+        Int availableTickets
+        DateTime createdAt
+        DateTime updatedAt
+    }
+    Ticket {
+        Int id PK
+        Int eventId FK
+        String category
+        Int price
+        Int availableQuantity
+        Int soldQuantity
+        DateTime createdAt
+        DateTime updatedAt
+    }
+    Purchase {
+        Int id PK
+        Int userId FK
+        Int ticketId FK
+        Int quantity
+        DateTime purchasedAt
+        DateTime createdAt
+        DateTime updatedAt
+    }
+
+    User ||--o| Event : creates
+    Event ||--o| Ticket : has
+    User ||--o| Purchase : makes
+    Ticket ||--o| Purchase : includes
